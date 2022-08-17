@@ -13,9 +13,6 @@ const sensors=[
   {id: 44, name: 'Sensor 44'}
 ]
  
-
-
-
 function App() {
 
   const dataRecords = new DataRecords();
@@ -43,5 +40,7 @@ useEffect(() => {
 
 
   }
+
+
 
   export default App;
