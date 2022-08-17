@@ -3,10 +3,10 @@ import Plot from "react-plotly.js";
 
 
 const layout = {
-  width : 400, height: 400, title: 'Parametr Graph', xaxis: {type: 'date'}
+  width : 600, height: 600, title: 'Parametr Graph', xaxis: {type: 'date'}
 };
 
-export default function ParametresMulti({ param = [], record = []}) {
+export default function ParametresMulti({ param = [{}], record = []}) {
 
     const [plot, setPlot] = useState([])
     
@@ -15,24 +15,21 @@ export default function ParametresMulti({ param = [], record = []}) {
       console.log(record);
       console.log(param);
       const newPlot = [];
-      console.log(newPlot)
-      param.forEach((id) => {
+      param.forEach((id, name) => {
         newPlot.push(
            {
-    
-            y : record.filter(({sensor_id}) => id == sensor_id).map(({value}) => value),
-            x: record.filter(({sensor_id}) => id == sensor_id).map(({create_epoch_tms}) => create_epoch_tms),
-            
-    
+            x: record.filter(({sensor_id}) => id.id === sensor_id).map(({create_epoch_tms}) => create_epoch_tms),
+            y: record.filter(({sensor_id}) => id.id === sensor_id).map(({value}) => value),
             type: 'scatter',
             mode: 'line',
+            name: id.name
            }
           );
           
        });
       console.log(newPlot);
-      console.log(param);
       setPlot(newPlot);
+      console.log(plot);
     
     }, [param, record])
     

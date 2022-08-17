@@ -24,13 +24,20 @@ useEffect(() => {
   dataRecords.getData().then(data => setRecords(data));
   }, []); 
 
-  
+
+  function selectParam(arr) {
+    var filterObj = sensors
+    .filter(el => arr.includes(String(el.id)))
+    .map(el => el);
+    return filterObj;
+  }  
+
   
   return (
     <>
     <MySelectMulti options={sensors} onChange={setmultiSelect} />
     {<div>{multiSelect.join(",")}</div>}
-    <ParametresMulti param={multiSelect} record={records}/>
+    <ParametresMulti param={selectParam(multiSelect)} record={records}/>
     
 
 
